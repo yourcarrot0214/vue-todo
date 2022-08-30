@@ -7,10 +7,10 @@
 <script>
 export default {
   methods: {
-    allClear: function() {
-      this.$emit("allClear");
-    }
-  }
+    allClear: function () {
+      this.$store.commit("clearAll");
+    },
+  },
 };
 </script>
 
