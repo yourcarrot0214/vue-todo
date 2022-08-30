@@ -19,7 +19,7 @@ import TodoFooter from "./components/TodoFooter";
 
 export default {
   name: "App",
-  data: function() {
+  data() {
     return {
       todos: [],
       id: 0
