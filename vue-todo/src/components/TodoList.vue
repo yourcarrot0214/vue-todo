@@ -1,11 +1,7 @@
 <template>
   <div class="todolist-container">
     <ul>
-      <li
-        v-for="todo in this.$store.state.todos"
-        v-bind:key="todo.item"
-        name="todo.item"
-      >
+      <li v-for="todo in this.storedTodos" v-bind:key="todo.item" name="todo.item">
         <span v-on:click="toggleCompleted(todo.item)">
           <img v-show="!todo.completed" src="../assets/circle-icon.png" />
           <img v-show="todo.completed" src="../assets/check-circle-icon.png" />
@@ -20,15 +16,18 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   methods: {
-    removeTodo: function (todo) {
-      this.$store.commit("removeTodo", todo);
-    },
-    toggleCompleted: function (todo) {
-      this.$store.commit("toggleCompleted", todo);
-    },
+    ...mapMutations({
+      removeTodo: "removeTodo",
+      toggleCompleted: "toggleCompleted"
+    })
   },
+  computed: {
+    ...mapGetters(["storedTodos"])
+  }
 };
 </script>
 

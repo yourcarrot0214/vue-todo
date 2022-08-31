@@ -15,18 +15,12 @@ import TodoFooter from "./components/TodoFooter";
 
 export default {
   name: "App",
-  data() {
-    return {
-      todos: this.$store.state.todos,
-      id: 0,
-    };
-  },
   components: {
     TodoHeader,
     TodoInput,
     TodoList,
-    TodoFooter,
-  },
+    TodoFooter
+  }
 };
 </script>
 
