@@ -18,38 +18,37 @@
 
 <script>
 import ModalComponent from "./common/ModalComponent";
-import { mapMutations } from "vuex";
+import { useTodoStore } from "../main";
+
+const todoStore = useTodoStore();
 
 export default {
-  data: function() {
+  data: function () {
     return {
       newTodoItem: {
         completed: false,
-        item: ""
+        item: "",
       },
-      showModal: false
+      showModal: false,
     };
   },
   methods: {
-    ...mapMutations({
-      storedAddTodo: "addTodo"
-    }),
-    addTodo: function() {
+    addTodo: function () {
       if (this.newTodoItem.item === "") {
         this.showModal = true;
         return;
       } else {
-        this.storedAddTodo(this.newTodoItem);
+        todoStore.addTodo(this.newTodoItem);
         this.clearInput();
       }
     },
-    clearInput: function() {
+    clearInput: function () {
       this.newTodoItem.item = "";
-    }
+    },
   },
   components: {
-    Modal: ModalComponent
-  }
+    Modal: ModalComponent,
+  },
 };
 </script>
 
