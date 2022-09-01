@@ -6,7 +6,7 @@
           <img v-show="!todo.completed" src="../assets/circle-icon.png" />
           <img v-show="todo.completed" src="../assets/check-circle-icon.png" />
         </span>
-        {{todo.item}}
+        {{ todo.item }}
         <span v-on:click="removeTodo(todo.item)">
           <img src="../assets/trash-icon.png" />
         </span>
@@ -16,15 +16,58 @@
 </template>
 
 <script>
+import EventBus from "./common/EventBus";
+
 export default {
-  props: ["todos"],
+  data: function() {
+    return {
+      todos: []
+    };
+  },
   methods: {
-    removeTodo: function(todo) {
-      this.$emit("removeTodo", todo);
+    removeTodo: function(targetTodo) {
+      this.todos = this.todos.filter(todo => todo.item !== targetTodo);
+      localStorage.removeItem(`todo-${targetTodo}`);
     },
-    toggleCompleted: function(todo) {
-      this.$emit("toggleCompleted", todo);
+    toggleCompleted: function(targetTodo) {
+      this.todos = this.todos.map(todo =>
+        todo.item === targetTodo
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      );
+      let todo = JSON.parse(localStorage.getItem(`todo-${targetTodo}`));
+      localStorage.setItem(
+        `todo-${targetTodo}`,
+        JSON.stringify({
+          ...todo,
+          completed: !todo.completed
+        })
+      );
+    },
+    addTodo: function(newTodoItem) {
+      const { item, completed } = newTodoItem;
+      this.todos = [...this.todos, { item, completed }];
+      localStorage.setItem(
+        `todo-${newTodoItem.item}`,
+        JSON.stringify(newTodoItem)
+      );
+    },
+    allClear: function() {
+      this.todos = [];
+      localStorage.clear();
     }
+  },
+  created: function() {
+    if (localStorage.length > 0) {
+      for (let i = 0; i < localStorage.length; i++) {
+        this.todos.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+      }
+    }
+
+    EventBus.$on("addTodo", this.addTodo);
+    EventBus.$on("removeTodo", this.removeTodo);
+    EventBus.$on("toggleCompleted", this.toggleCompleted);
+    EventBus.$on("allClear", this.allClear);
   }
 };
 </script>

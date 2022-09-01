@@ -18,34 +18,35 @@
 
 <script>
 import ModalComponent from "./common/ModalComponent";
+import EventBus from "./common/EventBus";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       newTodoItem: {
         completed: false,
-        item: "",
+        item: ""
       },
-      showModal: false,
+      showModal: false
     };
   },
   methods: {
-    addTodo: function () {
+    addTodo: function() {
       if (this.newTodoItem.item === "") {
         this.showModal = true;
         return;
       } else {
-        this.$emit("addTodo", this.newTodoItem);
+        EventBus.$emit("addTodo", this.newTodoItem);
         this.clearInput();
       }
     },
-    clearInput: function () {
+    clearInput: function() {
       this.newTodoItem.item = "";
-    },
+    }
   },
   components: {
-    Modal: ModalComponent,
-  },
+    Modal: ModalComponent
+  }
 };
 </script>
 

@@ -5,10 +5,12 @@
 </template>
 
 <script>
+import EventBus from "./common/EventBus";
+
 export default {
   methods: {
     allClear: function() {
-      this.$emit("allClear");
+      EventBus.$emit("allClear");
     }
   }
 };
