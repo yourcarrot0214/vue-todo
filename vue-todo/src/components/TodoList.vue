@@ -17,12 +17,15 @@
 
 <script>
 export default {
+  // 📑
   props: ["todos"],
   methods: {
     removeTodo: function(todo) {
+      // 📡
       this.$emit("removeTodo", todo);
     },
     toggleCompleted: function(todo) {
+      // 📡
       this.$emit("toggleCompleted", todo);
     }
   }

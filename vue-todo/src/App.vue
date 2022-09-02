@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <TodoHeader />
+    <!-- 🛰 🕹 -->
     <TodoInput v-on:addTodo="addTodo" />
+    <!-- 🛰 🕹🕹 📑 -->
     <TodoList
       v-bind:todos="todos"
       v-on:removeTodo="removeTodo"
@@ -19,12 +21,14 @@ import TodoFooter from "./components/TodoFooter";
 
 export default {
   name: "App",
+  // 📦
   data() {
     return {
       todos: [],
-      id: 0,
+      id: 0
     };
   },
+  // 🎮 🕹🕹🕹🕹
   methods: {
     addTodo(newTodoItem) {
       const { item, completed } = newTodoItem;
@@ -35,11 +39,11 @@ export default {
       );
     },
     removeTodo(targetTodo) {
-      this.todos = this.todos.filter((todo) => todo.item !== targetTodo);
+      this.todos = this.todos.filter(todo => todo.item !== targetTodo);
       localStorage.removeItem(`todo-${targetTodo}`);
     },
     toggleCompleted(targetTodo) {
-      this.todos = this.todos.map((todo) =>
+      this.todos = this.todos.map(todo =>
         todo.item === targetTodo
           ? { ...todo, completed: !todo.completed }
           : todo
@@ -49,28 +53,29 @@ export default {
         `todo-${targetTodo}`,
         JSON.stringify({
           ...todo,
-          completed: !todo.completed,
+          completed: !todo.completed
         })
       );
     },
     allClear() {
       this.todos = [];
       localStorage.clear();
-    },
+    }
   },
+  // 🗄 📁📁📁📁
   components: {
     TodoHeader,
     TodoInput,
     TodoList,
-    TodoFooter,
+    TodoFooter
   },
-  created: function () {
+  created: function() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
         this.todos.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
       }
     }
-  },
+  }
 };
 </script>
 
