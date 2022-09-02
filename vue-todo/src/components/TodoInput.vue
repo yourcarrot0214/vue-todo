@@ -18,6 +18,7 @@
 
 <script>
 import ModalComponent from "./common/ModalComponent";
+// 🚌
 import EventBus from "./common/EventBus";
 
 export default {
@@ -36,6 +37,7 @@ export default {
         this.showModal = true;
         return;
       } else {
+        // 🚌 📡
         EventBus.$emit("addTodo", this.newTodoItem);
         this.clearInput();
       }

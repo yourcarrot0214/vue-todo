@@ -16,14 +16,17 @@
 </template>
 
 <script>
+// 🚌
 import EventBus from "./common/EventBus";
 
 export default {
+  // 📦
   data: function() {
     return {
       todos: []
     };
   },
+  // 🎮 🕹🕹🕹🕹
   methods: {
     removeTodo: function(targetTodo) {
       this.todos = this.todos.filter(todo => todo.item !== targetTodo);
@@ -63,7 +66,7 @@ export default {
         this.todos.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
       }
     }
-
+    // 🚌 🛰
     EventBus.$on("addTodo", this.addTodo);
     EventBus.$on("removeTodo", this.removeTodo);
     EventBus.$on("toggleCompleted", this.toggleCompleted);

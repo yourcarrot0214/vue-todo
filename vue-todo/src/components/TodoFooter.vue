@@ -5,11 +5,13 @@
 </template>
 
 <script>
+// 🚌
 import EventBus from "./common/EventBus";
 
 export default {
   methods: {
     allClear: function() {
+      // 🚌📡
       EventBus.$emit("allClear");
     }
   }

@@ -15,6 +15,7 @@ import TodoFooter from "./components/TodoFooter";
 
 export default {
   name: "App",
+  // 🗄
   components: {
     TodoHeader,
     TodoInput,
