@@ -1,6 +1,7 @@
 <template>
   <div class="todolist-container">
     <ul>
+      <!-- 📡📑 -->
       <li
         v-for="todo in this.$store.state.todos"
         v-bind:key="todo.item"
@@ -23,9 +24,11 @@
 export default {
   methods: {
     removeTodo: function (todo) {
+      // 📡
       this.$store.commit("removeTodo", todo);
     },
     toggleCompleted: function (todo) {
+      // 📡
       this.$store.commit("toggleCompleted", todo);
     },
   },

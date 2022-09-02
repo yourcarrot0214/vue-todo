@@ -33,9 +33,11 @@ const storage = {
 };
 
 export const store = new Vuex.Store({
+  // 📦
   state: {
     todos: storage.getTodos(),
   },
+  // 🛰 🎮 🕹🕹🕹🕹
   mutations: {
     addTodo: function (state, newTodoItem) {
       const { item, completed } = newTodoItem;
